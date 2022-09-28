@@ -1,0 +1,42 @@
+.m-tabbar {
+    background-color: rgb(235, 235, 235);
+}
+
+body {
+    background: rgb(235, 235, 235);
+}
+
+.navbar-center {
+    background-color: rgb(255, 255, 235);
+}
+
+body {
+    background: rgb(235, 235, 235);
+}
+
+.talk input {
+    background-color: rgb(223, 223, 223);
+}
+
+.send {
+    background-color: rgb(223, 223, 223);
+    color: black;
+}
+
+.mk-chat-box .name {
+    color: black;
+}
+
+.m-cell {
+    color: rgb(223, 223, 223);
+}
+
+.m-cell a.cell-item,
+.m-cell label.cell-item {
+    background-color: rgb(223, 223, 223);
+}
+
+.m-cell a.cell-item:active,
+.m-cell label.cell-item:active {
+    background-color: rgb(170, 170, 170);
+}

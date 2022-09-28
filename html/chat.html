@@ -1,0 +1,201 @@
+<head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8; X-Wap-Proxy-Cookie=none" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link type="text/css" href="../css/chat.css?v=1.2" rel="stylesheet">
+    <link type="text/css" href="../css/button.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/upload_file.css" media="screen" type="text/css" />
+    <link rel="stylesheet" href="../css/ydui.css?rev=@@hash">
+    <link rel="stylesheet" href="../css/icons.css?rev=@@hash">
+    <link rel="stylesheet" href="../css/back_ground.css">
+    <title>唠嗑</title>
+</head>
+<style>
+
+</style>
+
+<div style="background-image: url('/pictures/灵芝.png')" id="back_ground" class="back_ground">
+
+</div>
+
+<body>
+    <div id="load_page">
+        <font color="blue" size:500%>LOADING</font>
+    </div>
+    <article style="padding: 0 7px;">
+        <!--主界面-->
+        <div id="main" style="display: none;">
+            <!--聊天列表-->
+
+            <div id="index_list_data" class="m-cell">
+                <section id="index" class="g-scrollview"></section>
+            </div>
+            <!--好友-->
+            <div class="m-cell" id="friends">
+            </div>
+            <!--其他列表-->
+            <div id="me" style="display: none;">
+                <div class="m-cell">
+                    <!--个人信息设置-->
+                    <a href="javascript:void(0);" onclick="in_page('personal_settings')" class="cell-item">
+                        <div class="cell-icon">
+                            <img src="/images/edit.png" alt="">
+                        </div>
+                        <div class="cell-left">编辑个人信息</div>
+                        <div class="cell-right cell-arrow"></div>
+                    </a>
+                    <a href="javascript:void(0);" onclick="exit()" class="cell-item">
+                        <div class="cell-icon">
+                            <i class="icon-delete"></i>
+                        </div>
+                        <div class="cell-left">退出登录</div>
+                        <div class="cell-right cell-arrow"></div>
+                    </a>
+                </div>
+            </div>
+            <!--底部导航-->
+            <footer class="m-tabbar" id="floor" style="display:flex;"></footer>
+        </div>
+        <!--其他面业-->
+        <!--好友请求界面-->
+        <div id="allow_friend_quest" class="m-cell" style="display: none;">
+            <header class="m-navbar">
+                <a href="javascript:void(0);" onclick="out_page()" class="navbar-item"><i class="back-ico"></i></a>
+                <div class="navbar-center"><span class="navbar-title">好友验证</span></div>
+            </header>
+            <div class="m-celltitle">备注</div>
+        </div>
+        <!--个人设置-->
+        <div id="personal_settings" class="m-cell" style="display: none;">
+            <header class="m-navbar">
+                <a href="javascript:void(0);" onclick="out_page()" class="navbar-item"><i class="back-ico"></i></a>
+                <div class="navbar-center"><span class="navbar-title">个人信息编辑</span></div>
+            </header>
+            <div class="m-celltitle">选择用户头像</div>
+            <div class="m-button">
+                <input type="file" class="upload" value="hollow" id="user_head_pic">
+                <button onclick="upload()" class="btn btn-primary">开始上传</button></br>
+                <progress id="progressBar_settings" style="font-size: 16px;"></progress>
+                <div id="time"></div>
+                <hr>
+                <div class="m-celltitle">个人随笔</div>
+                <div class="cell-right">
+                    <textarea class="cell-textarea" id="context" placeholder="奶奶的！！为什么不写！！！"></textarea>
+                </div>
+            </div>
+        </div>
+        <!--聊天页面-->
+        <div id='chat' class="m-cell" style="display: none;">
+            <header class="m-navbar">
+                <a href="javascript:void(0);" onclick="out_page()" class="navbar-item"><i class="back-ico"></i></a>
+                <div class="navbar-center"><span class="navbar-title" id="chat_name"></span></div>
+            </header>
+            <div class="mk-chat-box" id="chat_box"></div>
+            <div class="write input">
+                <input type="text" name="text" placeholder="" id="word"/>
+                <input type="file" class="fileobj" style="width: 50%; padding-top :5px;padding-left:5px"/>
+                <a href="javascript:;" id="send" class="write-link send">走你</a>
+            </div>
+        </div>
+        <!--搜索用户-->
+        <div style="display: none;" class="m-cell" id="search_user">
+            <header class="m-navbar">
+                <a href="javascript:void(0);" onclick="out_page()" class="navbar-item"><i class="back-ico"></i></a>
+                <div class="navbar-center"><span class="navbar-title">人员搜索</span></div>
+            </header>
+        </div>
+        <!--搜索聊群-->
+        <div style="display: none;" class="m-cell" id="search_group">
+            <header class="m-navbar">
+                <a href="javascript:void(0);" onclick="out_page()" class="navbar-item"><i class="back-ico"></i></a>
+                <div class="navbar-center"><span class="navbar-title">聊群搜索</span></div>
+            </header>
+            <div class="m-cell">
+                <div class="cell-item">
+                    <div class="cell-left"><i class="icon-search"></i></i>
+                    </div>
+                    <div class="cell-right">
+                        <input class="cell-input" placeholder="昵称或账户" id="search_group_input" autocomplete="off"
+                            oninput="search_group()">
+                        <a href="javascript:;" onclick="search_group()" class="btn btn-primary">查找</a>
+                    </div>
+                </div>
+                <article class="m-list list-theme4" id="search_group_ret"></article>
+
+            </div>
+        </div>
+        <div id="add_user_edit" class="m-cell" style="display: none;">
+            <header class="m-navbar">
+                <a href="javascript:void(0);" onclick="out_page()" class="navbar-item"><i class="back-ico"></i></a>
+                <div class="navbar-center"><span class="navbar-title">添加人员-编辑备注</span></div>
+            </header>
+            <div class="m-cell">
+                <div class="m-celltitle">备注</div>
+                <div class="m-cell">
+                    <div class="cell-right">
+                        <textarea class="cell-textarea" placeholder="奶奶的！！为什么不写！！！" id="user_add_remark"></textarea>
+                    </div>
+                    <div class="m-button">
+                        <button type="button" class="btn-block btn-primary" onclick="add_friend()">添加</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--好友列表-->
+        <div id="friend_list" class="m-cell" style="display:none">
+            <header class="m-navbar">
+                <a href="javascript:void(0);" onclick="out_page()" class="navbar-item"><i class="back-ico"></i></a>
+                <div class="navbar-center"><span class="navbar-title">好友列表</span></div>
+            </header>
+            <section class="g-scrollview">
+                <div id="friend_list_data" class="m-cell"></div>
+            </section>
+        </div>
+        <!--好友请求列表-->
+        <div id="friedn_quest_list" class="m-cell" style="display: none;">
+            <header class="m-navbar">
+                <a href="javascript:void(0);" onclick="out_page()" class="navbar-item"><i class="back-ico"></i></a>
+                <div class="navbar-center"><span class="navbar-title">好友请求列表</span></div>
+            </header>
+        </div>
+        <!--创建聊群界面-->
+        <div id="group_creat" class="m-cell" style="display:none">
+            <header class="m-navbar">
+                <a href="javascript:void(0);" onclick="out_page()" class="navbar-item"><i class="back-ico"></i></a>
+                <div class="navbar-center"><span class="navbar-title">创建聊群</span></div>
+            </header>
+            <label class="cell-item">
+                <div class="cell-right"><input type="text" id="greate_group_name" class="cell-input"
+                        placeholder="群名(奶奶的！！为什么不写！！！)" autocomplete="off"></div>
+                <div class="cell-right">聊群头像<input type="file" id="create_group_pic" value="hollow" id="group_pic">
+                </div>
+            </label>
+            <label class="cell-item">
+                <span class="cell-left">加入验证</span>
+                <label class="cell-right">
+                    <input type="checkbox" id="creat_group_check" value="1" class="m-switch">
+                </label>
+            </label>
+            <textarea class="cell-textarea" id="creat_group_text" placeholder="聊群简介"></textarea>
+            <button type="button" onclick="create_froup()" class="btn-block btn-primary">创建</button>
+        </div>
+        <!--聊群列表-->
+        <div id="group_list" class="m-cell" style="display:none">
+            <header class="m-navbar">
+                <a href="javascript:void(0);" onclick="out_page()" class="navbar-item"><i class="back-ico"></i></a>
+                <div class="navbar-center"><span class="navbar-title">聊群列表</span></div>
+            </header>
+            <section class="g-scrollview">
+                <div id="group_list_data" class="m-cell"></div>
+            </section>
+        </div>
+</body>
+<script src="../js/chat/message.js"></script>
+<script src="../js/chat/group.js"></script>
+<script src="../js/chat/friend.js"></script>
+<script src="../js/func.js"></script>
+<script src="../js/chat/page.js"></script>
+<script src="../js/chat/chat_class.js"></script>
+<script src="../js/chat/user.js"></script>
+<script src="../js/chat/main.js"></script>
+<script src="../js/settings.js"></script>
+<script src="../js/ydui.flexible.js"></script>
